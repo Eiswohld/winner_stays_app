@@ -11,28 +11,50 @@ export default function QuestionCard({
   onAnswer,
   selectedAnswer,
 }: Props) {
+  const isCorrect = selectedAnswer === question.correctAnswer;
+
   return (
     <article className="question-card">
       <h2>{question.question}</h2>
 
-      <button onClick={() => onAnswer("A")} disabled={selectedAnswer !== null}>
-        A. {question.optionA}
-      </button>
+      <section className="answer-options">
+        <button
+          className={`answer-button ${
+            selectedAnswer === "A"
+              ? question.correctAnswer === "A"
+                ? "correct"
+                : "incorrect"
+              : ""
+          }`}
+          onClick={() => onAnswer("A")}
+          disabled={selectedAnswer !== null}
+        >
+          {question.optionA}
+        </button>
 
-      <button onClick={() => onAnswer("B")} disabled={selectedAnswer !== null}>
-        B. {question.optionB}
-      </button>
+        <button
+          className={`answer-button ${
+            selectedAnswer === "B"
+              ? question.correctAnswer === "B"
+                ? "correct"
+                : "incorrect"
+              : ""
+          }`}
+          onClick={() => onAnswer("B")}
+          disabled={selectedAnswer !== null}
+        >
+          {question.optionB}
+        </button>
+      </section>
 
       {selectedAnswer !== null && (
-        <div>
-          <h3>
-            {selectedAnswer === question.correctAnswer
-              ? "Rätt svar!"
-              : "Fel svar!"}
+        <section className="feedback">
+          <h3 className={isCorrect ? "feedback-correct" : "feedback-incorrect"}>
+            {isCorrect ? "Rätt svar!" : "Fel svar!"}
           </h3>
 
           <p>{question.explanation}</p>
-        </div>
+        </section>
       )}
     </article>
   );

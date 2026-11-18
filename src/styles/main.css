@@ -1,77 +1,326 @@
-/* Global reset */
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700;800;900&display=swap");
+
+/* GRUNDINSTÄLLNINGAR */
+
+:root {
+  font-family: "Nunito", sans-serif;
+  color: #29283a;
+  background: #f7f6fb;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  font-weight: 500;
+}
+
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
-/* Grundinställningar */
-html,
-body,
-#root {
-  width: 100%;
-  min-height: 100%;
-}
-
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #f5f6fa;
-  color: #222;
-  line-height: 1.6;
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: #f7f6fb;
 }
 
-/* App */
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+button:focus-visible {
+  outline: 4px solid #7562b5;
+  outline-offset: 4px;
+}
+
 #root {
   min-height: 100vh;
 }
 
-/* Knappar */
-button {
-  cursor: pointer;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  background-color: #4f46e5;
-  color: white;
+/* HUVUDLAYOUT */
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+  padding: 45px 24px;
+}
+
+.start-page {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* STARTSIDAN */
+
+.hero {
+  text-align: center;
+  margin-bottom: 55px;
+  padding: 35px 20px;
+  background: #eeeafb;
+  border-radius: 24px;
+}
+
+.hero h1,
+.quiz-header h1,
+.result h1 {
+  font-family: "Nunito", sans-serif;
+  font-weight: 900;
+  color: #40365f;
+}
+
+.hero h1 {
+  font-size: clamp(32px, 5vw, 48px);
+  margin: 10px 0;
+}
+
+.hero p {
+  color: #625c76;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* KATEGORIER */
+
+.categories h2 {
+  text-align: center;
+  font-size: 27px;
+  margin-bottom: 25px;
+  color: #40365f;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.category-grid button {
+  min-height: 190px;
+  padding: 25px;
+  background: #ffffff;
+  border: 2px solid #e7e3f1;
+  border-radius: 20px;
+  text-align: left;
+  color: #29283a;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.category-grid button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 22px #40365f18;
+  border-color: #a99bd1;
+}
+
+.category-grid h3 {
+  font-size: 21px;
+  margin: 0 0 12px;
+  color: #514477;
+}
+
+.category-grid p {
+  color: #625f70;
+  line-height: 1.6;
   font-size: 16px;
-  transition: 0.2s ease;
 }
 
-button:hover {
-  background-color: #3730a3;
-  transform: translateY(-2px);
+/* QUIZSIDAN */
+
+.quiz-page {
+  max-width: 850px;
+  margin: 0 auto;
 }
 
-/* Inputfält */
-input,
-textarea,
-select {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+.quiz-header {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 25px;
+  background: #eeeafb;
+  border-radius: 20px;
+}
+
+.quiz-header h1 {
+  font-size: clamp(28px, 4vw, 40px);
+  margin: 5px 0 10px;
+}
+
+.quiz-header p {
+  color: #625c76;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* FRÅGEKORT */
+
+.question-card {
+  text-align: center;
+  padding: 30px;
+  background: #ffffff;
+  border: 2px solid #e7e3f1;
+  border-radius: 22px;
+  box-shadow: 0 5px 20px #40365f0b;
+}
+
+.question-card h2 {
+  font-size: clamp(22px, 3vw, 30px);
+  line-height: 1.5;
+  color: #353047;
+  margin: 5px 0 30px;
+}
+
+/* SVARSALTERNATIV */
+
+.answer-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.answer-button {
+  min-height: 150px;
+  padding: 25px;
+  background: #f2effb;
+  border: 3px solid #ded7ef;
+  border-radius: 18px;
+  color: #40365f;
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1.5;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.answer-button:not(:disabled):hover {
+  background: #e9e3f8;
+  border-color: #9886c7;
+}
+
+.answer-button:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+/* RÄTT OCH FEL */
+
+.answer-button.correct {
+  background: #e1f4e8;
+  border: 3px solid #378653;
+  color: #205b35;
+}
+
+.answer-button.incorrect {
+  background: #fbe7e7;
+  border: 3px solid #c85b5b;
+  color: #842f2f;
+}
+
+.feedback {
+  margin-top: 25px;
+  padding: 20px;
+  background: #f7f6fb;
+  border-radius: 16px;
+  border: 1px solid #e7e3f1;
+}
+
+.feedback h3 {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+
+.feedback-correct {
+  color: #287442;
+}
+
+.feedback-incorrect {
+  color: #a33c3c;
+}
+
+.feedback p {
+  color: #454153;
+  line-height: 1.6;
+  font-size: 17px;
+  margin: 0;
+}
+
+/* KNAPPAR */
+
+.quiz-page > button,
+.result button {
+  margin-top: 25px;
+  padding: 14px 22px;
+  background: #ffffff;
+  border: 2px solid #d9d3e8;
+  border-radius: 12px;
+  color: #514477;
   font-size: 16px;
-  outline: none;
+  font-weight: 800;
 }
 
-input:focus,
-textarea:focus,
-select:focus {
-  border-color: #4f46e5;
+.quiz-page > button:hover,
+.result button:hover {
+  background: #eeeafb;
 }
 
-/* Bilder */
-img {
-  max-width: 100%;
-  display: block;
+/* RESULTAT */
+
+.result {
+  max-width: 600px;
+  margin: 80px auto;
+  padding: 40px 25px;
+  text-align: center;
+  background: #ffffff;
+  border: 2px solid #e7e3f1;
+  border-radius: 24px;
 }
 
-/* Responsiv design */
-@media (max-width: 768px) {
-  body {
-    font-size: 14px;
+.result h1 {
+  font-size: 38px;
+}
+
+.result h2 {
+  font-size: clamp(32px, 5vw, 48px);
+  color: #378653;
+}
+
+/* MOBILANPASSNING */
+
+@media (max-width: 700px) {
+  .app {
+    padding: 25px 15px;
   }
 
-  button {
-    font-size: 14px;
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .answer-options {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .answer-button {
+    min-height: 100px;
+  }
+
+  .question-card {
+    padding: 20px;
+  }
+
+  .hero {
+    margin-bottom: 30px;
+    padding: 25px 15px;
+  }
+}
+
+/* MINSKAD RÖRELSE */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
   }
 }
